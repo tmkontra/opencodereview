@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+    postgres:
+        image: postgres:13
+        restart: always
+        environment:
+          - POSTGRES_USER=community
+          - POSTGRES_PASSWORD=password
+          - POSTGRES_DB=community_dev
+        ports:
+          - '54322:5432'
