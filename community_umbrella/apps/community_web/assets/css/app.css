@@ -1,5 +1,53 @@
 /* This file is for your main application CSS */
-@import "./phoenix.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#nav-container label,
+#menu-toggle {
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  /* (A) BREAK INTO VERTICAL MENU */
+  #mobile-menu a {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-top: 1px solid #333;
+  }
+
+  #mobile-menu li :hover {
+    background-color: gray;
+  }
+
+  /* (B) SHOW HAMBURGER ICON */
+  #nav-container label {
+    display: inline-block;
+    /* color: white; */
+    /* background: #a02620; */
+    font-style: normal;
+    font-size: 1.2em;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  #nav-container label :hover {
+    
+  }
+
+  /* (C) TOGGLE SHOW/HIDE MENU */
+  #mobile-menu {
+    display: none;
+  }
+
+  input:checked~#mobile-menu {
+    display: block;
+  }
+}
+
 
 /* Alerts and form errors used by phx.new */
 .alert {

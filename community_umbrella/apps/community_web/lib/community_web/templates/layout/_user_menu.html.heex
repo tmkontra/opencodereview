@@ -1,0 +1,17 @@
+<label for="menu-toggle">&#9776;</label>
+<input type="checkbox" id="menu-toggle"/>
+<div class="hidden w-full md:block md:w-auto" id="mobile-menu">
+  <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+    <%= if @current_user do %>
+      <li><%= @current_user.email %></li>
+      <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
+      <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+    <% else %>
+      <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+      <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+    <% end %>
+    <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+      <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+    <% end %>
+  </ul>
+</div>
