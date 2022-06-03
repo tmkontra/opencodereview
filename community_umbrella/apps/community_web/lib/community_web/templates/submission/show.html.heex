@@ -1,0 +1,28 @@
+<h1>Show Submission</h1>
+
+<ul>
+
+  <li>
+    <strong>Github:</strong>
+    <%= @submission.github_id %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @submission.url %>
+  </li>
+
+  <li>
+    <strong>Html url:</strong>
+    <%= @submission.html_url %>
+  </li>
+
+  <li>
+    <strong>Created at:</strong>
+    <%= @submission.created_at %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.submission_path(@conn, :edit, @submission) %></span> |
+<span><%= link "Back", to: Routes.submission_path(@conn, :index) %></span>

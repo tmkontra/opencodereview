@@ -7,6 +7,7 @@ defmodule Community.Accounts.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :github_access_token, :string, redact: true
 
     timestamps()
   end
@@ -28,11 +29,21 @@ defmodule Community.Accounts.User do
       validations on a LiveView form), this option can be set to `false`.
       Defaults to `true`.
   """
-  def registration_changeset(user, attrs, opts \\ []) do
+  def registration_changeset(user, %{provider: provider} = attrs, opts \\ []) do
+    _registration_changeset(user, attrs, opts)
+  end
+
+  defp _registration_changeset(user, %{provider: :identity} = attrs, opts) do
     user
     |> cast(attrs, [:email, :password])
     |> validate_email()
     |> validate_password(opts)
+  end
+
+  defp _registration_changeset(user, %{provider: :github} = attrs, opts) do
+    user
+    |> cast(attrs, [:email, :github_access_token])
+    |> validate_email()
   end
 
   defp validate_email(changeset) do

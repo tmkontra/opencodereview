@@ -1,4 +1,7 @@
 import Config
+import Dotenvy
+
+source!([".env", System.get_env()])
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
@@ -6,6 +9,17 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: env!("GITHUB_CLIENT_ID"),
+  client_secret: env!("GITHUB_CLIENT_SECRET")
+
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+  domain: env!("AUTH0_DOMAIN"),
+  client_id: env!("AUTH0_CLIENT_ID"),
+  client_secret: env!("AUTH0_CLIENT_SECRET")
+
+IO.puts "gcs #{env!("GITHUB_CLIENT_SECRET")}"
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

@@ -6,8 +6,7 @@ defmodule CommunityWeb.UserRegistrationController do
   alias CommunityWeb.UserAuth
 
   def new(conn, _params) do
-    changeset = Accounts.change_user_registration(%User{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html")
   end
 
   def create(conn, %{"user" => user_params}) do

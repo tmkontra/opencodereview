@@ -8,17 +8,20 @@
     <%= live_title_tag assigns[:page_title] || "Community", suffix: " · Phoenix Framework" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <script src="https://kit.fontawesome.com/c0551ca884.js" crossorigin="anonymous"></script>
   </head>
-  <body class="p-4 mx-8">
-    <header>
-        <nav>
-          <div class="flex flex-wrap justify-between items-center w-100"
+  <body>
+    <header class="bg-luckypoint">
+        <nav class="p-4 mx-8">
+          <div class="flex flex-wrap justify-between items-center w-100 text-white"
                 id="nav-container">
             <a href="/">Home</a>
             <%= render "_user_menu.html", assigns %>
           </div>
         </nav>
     </header>
-    <%= @inner_content %>
+    <main class="p-4 mx-8">
+      <%= @inner_content %>
+    </main>
   </body>
 </html>

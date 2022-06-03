@@ -29,6 +29,8 @@ defmodule CommunityWeb do
 
   def view do
     quote do
+      import CommunityWeb.ComponentHelpers
+
       use Phoenix.View,
         root: "lib/community_web/templates",
         namespace: CommunityWeb
@@ -39,6 +41,7 @@ defmodule CommunityWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+
     end
   end
 

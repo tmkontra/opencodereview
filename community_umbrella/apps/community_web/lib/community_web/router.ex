@@ -64,9 +64,9 @@ defmodule CommunityWeb.Router do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
     get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
+    # post "/users/register", UserRegistrationController, :create
     get "/users/log_in", UserSessionController, :new
-    post "/users/log_in", UserSessionController, :create
+    # post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
@@ -84,6 +84,11 @@ defmodule CommunityWeb.Router do
   scope "/", CommunityWeb do
     pipe_through [:browser]
 
+    scope "/login" do
+      get "/:provider", OauthController, :request
+      get "/:provider/callback", OauthController, :callback
+    end
+
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
@@ -91,10 +96,11 @@ defmodule CommunityWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
   end
 
-  scope "/auth", MyApp do
-    pipe_through :browser
+  scope "/u", CommunityWeb do
+    pipe_through [:browser, :require_authenticated_user]
 
-    get "/:provider", AuthController, :request
-    get "/:provider/callback", AuthController, :callback
+    get "/", PageController, :user_home
+    get "/submit", SubmissionController, :new
+    post "/submit", SubmissionController, :create
   end
 end

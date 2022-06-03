@@ -21,7 +21,7 @@ defmodule CommunityWeb.UserSessionController do
 
   def delete(conn, _params) do
     conn
-    |> put_flash(:info, "Logged out successfully.")
+    |> put_flash(:info, "You have been logged out.")
     |> UserAuth.log_out_user()
   end
 end

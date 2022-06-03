@@ -51,7 +51,8 @@ defmodule CommunityWeb.MixProject do
       {:community, in_umbrella: true},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:tentacat, "~> 2.0"}
     ]
   end
 

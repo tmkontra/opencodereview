@@ -42,8 +42,10 @@ defmodule Community.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.3"},
+      {:dotenvy, "~> 0.6.0"},
+      {:ueberauth_github, "~> 0.8.1"},
       {:ueberauth, "~> 0.7"},
-      {:ueberauth_github, "~> 0.7"}
+      # {:ueberauth_auth0, "~> 2.0"},
     ]
   end
 

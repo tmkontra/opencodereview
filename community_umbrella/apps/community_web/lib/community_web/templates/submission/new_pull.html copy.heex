@@ -1,0 +1,25 @@
+<h1>Select a PR</h1>
+
+<%# <%= render "form.html", Map.put(assigns, :action, Routes.submission_path(@conn, :create)) %>
+<div class="w-1/2 mx-auto">
+    <table class="table-auto">
+    <thead>
+        <tr>
+        <th>Pull Request</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <%= for pull <- @pulls do %>
+        <tr>
+        <td><%= pull["title"] %></td>
+        <td>
+            <%= link(to: Routes.submission_path(@conn, :new, repo: @repo_name, owner: @repo_owner, pull: pull["number"])) do %>
+                <%= btn(:primary, label: "Select") %>
+            <% end %>
+        </td>
+        </tr>
+    <% end %>
+    </tbody>
+    </table>
+</div>

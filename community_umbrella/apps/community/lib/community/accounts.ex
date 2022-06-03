@@ -7,6 +7,7 @@ defmodule Community.Accounts do
   alias Community.Repo
 
   alias Community.Accounts.{User, UserToken, UserNotifier}
+  alias Ueberauth.Auth
 
   ## Database getters
 
@@ -350,4 +351,26 @@ defmodule Community.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def get_or_create_user(%Auth{info: %{email: email}, provider: provider} = auth) do
+    IO.puts "get or create user #{email}"
+    case get_user_by_email(email) do
+      nil ->
+        IO.puts "creating user #{email}"
+        %{email: email, provider: provider}
+        |> with_auth_provider_params(provider, auth)
+        |> register_user()
+      user -> {:ok, user}
+    end
+  end
+
+  defp with_auth_provider_params(params, :github, %Auth{credentials: creds} = auth) do
+    %{github_access_token: creds.token}
+    |> Map.merge(params)
+  end
+
+  # defp with_auth_provider_params(params, :auth0, %Auth{credentials: creds} = auth) do
+  #   %{github_access_token: creds.token}
+  #   |> Map.merge(params)
+  # end
 end
