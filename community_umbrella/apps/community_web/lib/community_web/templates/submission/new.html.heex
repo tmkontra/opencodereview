@@ -14,7 +14,7 @@
         <tr>
         <td><%= repo["full_name"] %></td>
         <td>
-            <%= link(to: Routes.submission_path(@conn, :new, repo: repo["name"], owner: repo["owner"]["login"])) do %>
+            <%= link(to: Routes.submission_path(@conn, :pull, repo["owner"]["login"], repo["name"])) do %>
                 <%= btn(:primary, label: "Select") %>
             <% end %>
         </td>

@@ -100,7 +100,12 @@ defmodule CommunityWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/", PageController, :user_home
-    get "/submit", SubmissionController, :new
-    post "/submit", SubmissionController, :create
+
+    scope "/submit" do
+      get "", SubmissionController, :new
+      get "/:owner/:repo", SubmissionController, :pull
+      get "/:owner/:repo/:pull", SubmissionController, :confirm
+      post "/", SubmissionController, :create
+    end
   end
 end

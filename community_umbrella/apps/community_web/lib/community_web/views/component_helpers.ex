@@ -7,12 +7,17 @@ defmodule CommunityWeb.ComponentHelpers do
     CommunityWeb.ComponentsView.render(template, Keyword.merge(assigns, [do: block]))
   end
 
+  def btn(:primary, assigns, do: block) do
+    c("button_primary.html", assigns, do: block)
+  end
+
   def btn(:primary, do: block) do
     c("button_primary.html", [], do: block)
   end
 
-  def btn(:primary, label: label) do
-    c("button_primary.html", [do: label])
+  def btn(:primary, assigns) do
+    label = assigns[:label]
+    c("button_primary.html", assigns, do: label)
   end
 
 end

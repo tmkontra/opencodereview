@@ -5,7 +5,7 @@ defmodule CommunityWeb.SubmissionController do
   alias Community.Submissions.Submission
   alias Community.Github
 
-  def new(conn, %{"repo" => repo_name, "owner" => owner, "pull" => pull_number} = params) do
+  def confirm(conn, %{"repo" => repo_name, "owner" => owner, "pull" => pull_number} = params) do
     changeset = Submissions.change_submission(%Submission{})
     pull = conn.assigns.current_user
     |> Github.get_client()
@@ -13,7 +13,7 @@ defmodule CommunityWeb.SubmissionController do
     render(conn, "new_confirm.html", changeset: changeset, pull: pull, repo_name: repo_name, repo_owner: owner)
   end
 
-  def new(conn, %{"repo" => repo_name, "owner" => owner} = params) do
+  def pull(conn, %{"repo" => repo_name, "owner" => owner} = params) do
     changeset = Submissions.change_submission(%Submission{})
     pulls = conn.assigns.current_user
     |> Github.get_client()
@@ -21,7 +21,7 @@ defmodule CommunityWeb.SubmissionController do
     render(conn, "new_pull_select.html", changeset: changeset, pulls: pulls, repo_name: repo_name, repo_owner: owner)
   end
 
-  def new(conn, %{} = params) when params == %{} do
+  def new(conn, params) do
     changeset = Submissions.change_submission(%Submission{})
     repos = conn.assigns.current_user
     |> Github.get_client()
